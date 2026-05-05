@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="280" height="280" role="img" aria-label="SnackBunny stage 3">
+  
+  <g transform="translate(127 105.85000000000001) rotate(-14)">
+    <ellipse cx="0" cy="-38" rx="11" ry="38" fill="#E8A94A"></ellipse>
+    <ellipse cx="0" cy="-32" rx="6" ry="28" fill="#efc584"></ellipse>
+  </g>
+  <g transform="translate(153 105.85000000000001) rotate(14)">
+    <ellipse cx="0" cy="-38" rx="11" ry="38" fill="#E8A94A"></ellipse>
+    <ellipse cx="0" cy="-32" rx="6" ry="28" fill="#efc584"></ellipse>
+  </g>
+
+  
+  <ellipse cx="140" cy="184" rx="54" ry="74" fill="#E8A94A"></ellipse>
+  
+  <ellipse cx="140" cy="192" rx="37.8" ry="57.72" fill="#efc584"></ellipse>
+
+  
+  <ellipse cx="110.3" cy="246" rx="17" ry="8" fill="#E8A94A"></ellipse>
+  <ellipse cx="169.7" cy="246" rx="17" ry="8" fill="#E8A94A"></ellipse>
+
+  
+  <circle cx="140" cy="134.9" r="41.5" fill="#E8A94A"></circle>
+
+  
+  <ellipse cx="122" cy="140.9" rx="7" ry="4.8999999999999995" fill="rgba(255, 170, 170, 0.5)"></ellipse>
+  <ellipse cx="158" cy="140.9" rx="7" ry="4.8999999999999995" fill="rgba(255, 170, 170, 0.5)"></ellipse>
+
+  
+  <ellipse cx="129" cy="132.9" rx="3.4" ry="3.9099999999999997" fill="#4A3728"></ellipse>
+  <ellipse cx="151" cy="132.9" rx="3.4" ry="3.9099999999999997" fill="#4A3728"></ellipse>
+  <circle cx="130.2" cy="131.4" r="1" fill="#FFFFFF"></circle>
+  <circle cx="152.2" cy="131.4" r="1" fill="#FFFFFF"></circle>
+
+  
+  <path d="M 136.5 142.9 Q 140 146.4 143.5 142.9 Z" fill="#4A3728"></path>
+
+  <path d="M 136 147.9 L 144 147.9" stroke="#4A3728" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+</svg>
