@@ -100,8 +100,8 @@ const HowItWorksSection = () => {
         </div>
 
         {/* Panel */}
-        <div className="grid grid-cols-[72px_1fr] items-center gap-4 px-1 pb-1 min-h-[88px]">
-          <div className="w-[72px] h-[72px] rounded-[1rem] bg-[#FFF9F5] flex items-center justify-center overflow-hidden flex-shrink-0">
+        <div className="grid grid-cols-[72px_1fr] items-center gap-4 px-1 pb-1 min-h-22">
+          <div className="w-18 h-18 rounded-2xl bg-[#FFF9F5] flex items-center justify-center overflow-hidden shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/assets/bunny-stage-${STEPS[stepIdx].bunny}.svg`}
