@@ -59,7 +59,7 @@ const HeroSection = () => {
         {/* CTA — centered under bunny on both mobile and desktop */}
         <div className="flex flex-col items-center gap-3 mt-6">
           <a
-            href="#signup"
+            href="/home"
             className="bg-[#E07A5F] text-white font-extrabold text-lg px-9 py-4.5 rounded-4xl shadow-[0_6px_16px_rgba(224,122,95,0.35)] min-w-55 text-center hover:bg-[#B85A3F] active:scale-95 transition-all"
           >
             Let&apos;s go!

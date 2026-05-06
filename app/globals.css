@@ -169,6 +169,27 @@ body {
   display: none;
 }
 
+/* ===== Home screen animations ===== */
+@keyframes bunny-press {
+  0% { transform: scale(1) translateY(0); }
+  40% { transform: scale(0.95) translateY(4px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes counter-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.animate-bunny-press {
+  animation: bunny-press 180ms ease;
+}
+
+.animate-counter-pulse {
+  animation: counter-pulse 150ms ease;
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
