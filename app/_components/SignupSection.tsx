@@ -43,7 +43,7 @@ const SignupSection = () => {
   return (
     <section
       id="signup"
-      className="signup-section -mx-5 md:mx-0 mt-14 px-6 py-16 md:py-20 text-center rounded-none md:rounded-[1.5rem] relative overflow-hidden"
+      className="signup-section -mx-5 md:mx-0 mt-14 px-6 py-16 md:py-20 text-center rounded-none md:rounded-3xl relative overflow-hidden"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -51,18 +51,18 @@ const SignupSection = () => {
         alt=""
         width={110}
         height={110}
-        className="w-[110px] mx-auto mb-1 relative z-[1]"
+        className="w-27.5 mx-auto mb-1 relative z-1"
       />
 
-      <div className="text-xs font-bold tracking-[0.08em] uppercase text-[#E07A5F] mb-3 relative z-[1]">
+      <div className="text-xs font-bold tracking-[0.08em] uppercase text-[#E07A5F] mb-3 relative z-1">
         Almost there
       </div>
 
-      <h2 className="font-black text-[clamp(28px,7vw,38px)] leading-[1.05] tracking-tight text-[#4A3728] mb-3 relative z-[1] max-w-[16ch] mx-auto">
+      <h2 className="font-black text-[clamp(28px,7vw,38px)] leading-[1.05] tracking-tight text-[#4A3728] mb-3 relative z-1 max-w-[16ch] mx-auto">
         Adopt your <span className="text-[#E07A5F]">SnackBunny</span>
       </h2>
 
-      <p className="text-[#A08070] mx-auto mb-6 max-w-[30ch] text-[15px] font-medium relative z-[1]">
+      <p className="text-[#A08070] mx-auto mb-6 max-w-[30ch] text-[15px] font-medium relative z-1">
         Drop your email. We&apos;ll send you a magic link to start tapping in
         seconds.
       </p>
@@ -71,10 +71,10 @@ const SignupSection = () => {
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="flex flex-col gap-2.5 max-w-[360px] mx-auto relative z-[1]"
+          className="flex flex-col gap-2.5 max-w-90 mx-auto relative z-1"
         >
           <div
-            className={`flex gap-2 bg-white rounded-[2rem] p-1.5 shadow-[0_4px_12px_rgba(74,55,40,0.08)] focus-within:shadow-[0_0_0_4px_rgba(224,122,95,0.18),0_4px_12px_rgba(74,55,40,0.08)] transition-shadow ${
+            className={`flex gap-2 bg-white rounded-4xl p-1.5 shadow-[0_4px_12px_rgba(74,55,40,0.08)] focus-within:shadow-[0_0_0_4px_rgba(224,122,95,0.18),0_4px_12px_rgba(74,55,40,0.08)] transition-shadow ${
               shaking ? "animate-shake" : ""
             }`}
           >
@@ -85,25 +85,25 @@ const SignupSection = () => {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 min-w-0 border-0 outline-none bg-transparent px-[14px] py-3 font-bold text-[15px] text-[#4A3728] placeholder:text-[#C9A090] placeholder:font-medium"
+              className="flex-1 min-w-0 border-0 outline-none bg-transparent px-3.5 py-3 font-bold text-[15px] text-[#4A3728] placeholder:text-[#C9A090] placeholder:font-medium"
             />
             <button
               type="submit"
-              className="bg-[#E07A5F] text-white font-extrabold text-sm px-5 py-3 rounded-[2rem] shadow-[0_6px_16px_rgba(224,122,95,0.35)] flex-shrink-0 hover:bg-[#B85A3F] active:scale-[0.94] transition-all"
+              className="bg-[#E07A5F] text-white font-extrabold text-sm px-5 py-3 rounded-4xl shadow-[0_6px_16px_rgba(224,122,95,0.35)] shrink-0 hover:bg-[#B85A3F] active:scale-[0.94] transition-all"
             >
               Let&apos;s go!
             </button>
           </div>
           <div
             aria-live="polite"
-            className={`text-xs font-bold min-h-[18px] transition-colors ${msgColor}`}
+            className={`text-xs font-bold min-h-4.5 transition-colors ${msgColor}`}
           >
             {msg.text}
           </div>
         </form>
       ) : (
         <div
-          className="animate-pop-in bg-white p-6 rounded-[1.5rem] shadow-[0_4px_12px_rgba(74,55,40,0.08)] max-w-[360px] mx-auto relative z-[1]"
+          className="animate-pop-in bg-white p-6 rounded-3xl shadow-[0_4px_12px_rgba(74,55,40,0.08)] max-w-90 mx-auto relative z-1"
           role="status"
         >
           <h3 className="font-extrabold text-xl text-[#4A3728] mb-1.5">

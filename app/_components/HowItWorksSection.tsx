@@ -59,14 +59,14 @@ const HowItWorksSection = () => {
         Three taps to <span className="text-[#E07A5F]">awareness</span>
       </h2>
 
-      <div className="bg-white rounded-[1.5rem] p-[22px_18px_20px] shadow-[0_4px_12px_rgba(74,55,40,0.08)]">
+      <div className="bg-white rounded-3xl p-[22px_18px_20px] shadow-[0_4px_12px_rgba(74,55,40,0.08)]">
         {/* Step track */}
-        <div className="grid grid-cols-3 gap-2 relative mb-[18px]" role="tablist">
+        <div className="grid grid-cols-3 gap-2 relative mb-4.5" role="tablist">
           {/* Background line */}
-          <div className="absolute top-[19px] left-[16.66%] right-[16.66%] h-0.5 bg-[#E8D5C4] rounded-sm z-0" />
+          <div className="absolute top-4.75 left-[16.66%] right-[16.66%] h-0.5 bg-[#E8D5C4] rounded-sm z-0" />
           {/* Progress line */}
           <div
-            className={`absolute top-[19px] left-[16.66%] h-0.5 bg-[#E07A5F] rounded-sm z-[1] transition-all duration-[380ms] ease-out ${progressClass}`}
+            className={`absolute top-4.75 left-[16.66%] h-0.5 bg-[#E07A5F] rounded-sm z-1 transition-all duration-380 ease-out ${progressClass}`}
           />
 
           {STEPS.map((_, i) => (
@@ -75,10 +75,10 @@ const HowItWorksSection = () => {
               role="tab"
               aria-selected={i === stepIdx}
               onClick={() => goTo(i)}
-              className="flex flex-col items-center gap-2 relative z-[2]"
+              className="flex flex-col items-center gap-2 relative z-2"
             >
               <span
-                className={`w-[38px] h-[38px] rounded-full flex items-center justify-center font-black text-sm transition-all duration-[220ms] ${
+                className={`w-9.5 h-9.5 rounded-full flex items-center justify-center font-black text-sm transition-all duration-220 ${
                   i === stepIdx
                     ? "bg-[#E07A5F] border-2 border-[#E07A5F] text-white scale-[1.08] shadow-[0_6px_16px_rgba(224,122,95,0.35)]"
                     : i < stepIdx

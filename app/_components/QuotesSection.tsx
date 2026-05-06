@@ -31,20 +31,20 @@ const QuotesSection = () => (
     </h2>
 
     <div className="-mx-5 md:mx-0 overflow-x-auto no-scrollbar snap-x snap-mandatory px-5 md:px-0 pb-6 pt-2">
-      <div className="flex gap-[14px] w-max">
+      <div className="flex gap-3.5 w-max">
         {QUOTES.map(({ text, author, location }) => (
           <div
             key={author}
-            className="w-[280px] flex-shrink-0 snap-start bg-white rounded-[1.5rem] p-[22px_20px] shadow-sm"
+            className="w-70 shrink-0 snap-start bg-white rounded-3xl p-[22px_20px] shadow-sm"
           >
             <div className="text-[#FBBF24] text-sm tracking-[1px] mb-2">
               ★★★★★
             </div>
-            <p className="font-bold text-[15px] leading-[1.45] text-[#4A3728] mb-[14px]">
+            <p className="font-bold text-[15px] leading-[1.45] text-[#4A3728] mb-3.5">
               &ldquo;{text}&rdquo;
             </p>
-            <div className="flex items-center gap-[10px] text-[13px] text-[#A08070] font-bold">
-              <div className="w-8 h-8 rounded-full bg-[#FFE8DC] flex items-center justify-center font-black text-[13px] text-[#E07A5F] flex-shrink-0">
+            <div className="flex items-center gap-2.5 text-[13px] text-[#A08070] font-bold">
+              <div className="w-8 h-8 rounded-full bg-[#FFE8DC] flex items-center justify-center font-black text-[13px] text-[#E07A5F] shrink-0">
                 {author[0]}
               </div>
               <span>
