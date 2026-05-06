@@ -10,7 +10,6 @@ import BunnyTapZone from "./BunnyTapZone";
 import Counter from "./Counter";
 import UndoButton from "./UndoButton";
 import LoadingScreen from "./LoadingScreen";
-import NamingScreen from "./NamingScreen";
 
 interface Stage {
   icon: IconDefinition;
@@ -82,10 +81,11 @@ const getDateLabel = (): string => {
 };
 
 const BUNNY_NAME_KEY = "bunny_name";
+const ONBOARDING_COMPLETE_KEY = "onboarding_complete";
 
 const HomeScreen = () => {
   const [mounted, setMounted] = useState(false);
-  const [bunnyName, setBunnyName] = useState<string | null>(null);
+  const [bunnyName, setBunnyName] = useState("Bunny");
   const [count, setCount] = useState(0);
   const [tapKey, setTapKey] = useState(0);
   const [showUndo, setShowUndo] = useState(false);
@@ -93,20 +93,25 @@ const HomeScreen = () => {
   const dateLabel = getDateLabel();
 
   useEffect(() => {
+    if (!localStorage.getItem(ONBOARDING_COMPLETE_KEY)) {
+      // Grandfather existing users who named their bunny before onboarding existed
+      if (localStorage.getItem(BUNNY_NAME_KEY)) {
+        localStorage.setItem(ONBOARDING_COMPLETE_KEY, "true");
+        localStorage.setItem("committed_at", Date.now().toString());
+        localStorage.setItem("commitment_method", "grandfathered");
+      } else {
+        window.location.replace("/onboarding");
+        return;
+      }
+    }
     const todayCount = getTodayTimestamps().length;
-    const savedName = localStorage.getItem(BUNNY_NAME_KEY);
+    const savedName = localStorage.getItem(BUNNY_NAME_KEY) || "Bunny";
     setCount(todayCount);
     setBunnyName(savedName);
     setMounted(true);
   }, []);
 
-  const handleNameConfirm = (name: string) => {
-    localStorage.setItem(BUNNY_NAME_KEY, name);
-    setBunnyName(name);
-  };
-
   if (!mounted) return <LoadingScreen />;
-  if (!bunnyName) return <NamingScreen onConfirm={handleNameConfirm} />;
 
   const handleTap = () => {
     if (count >= 20) return;
