@@ -238,6 +238,18 @@ body {
   animation: particle-up 800ms var(--ease-out) forwards;
 }
 
+/* ===== History bar chart ===== */
+@keyframes bar-rise {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+/* ===== Settings confirm modal ===== */
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
