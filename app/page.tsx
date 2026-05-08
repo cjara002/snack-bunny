@@ -21,7 +21,7 @@ export default function Home() {
         {/* TODOCARLOS: once we get reviews they go here */}
         {/* <QuotesSection /> */}
         <PricingSection />
-        <SignupSection />
+        {/* <SignupSection /> */}
         <Footer />
       </main>
     </>

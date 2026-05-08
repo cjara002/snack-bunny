@@ -26,10 +26,10 @@ const Nav = () => {
           <img src="/assets/snack-bunny-logo.png" alt="SnackBunny" className="h-28 w-auto md:h-20" />
         </a>
         <a
-          href="#signup"
+          href="/onboarding"
           className="bg-[#E07A5F] text-white font-extrabold text-sm px-4 py-2.5 rounded-full shadow-[0_6px_16px_rgba(224,122,95,0.35)] hover:bg-[#B85A3F] active:scale-[0.94] transition-all"
         >
-          Get the app
+          Get started
         </a>
       </div>
     </header>

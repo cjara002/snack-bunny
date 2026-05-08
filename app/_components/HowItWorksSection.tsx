@@ -39,9 +39,7 @@ const HowItWorksSection = () => {
 
   const handleNext = () => {
     if (stepIdx === STEPS.length - 1) {
-      document
-        .getElementById("signup")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.location.href = "/onboarding";
     } else {
       goTo(stepIdx + 1);
     }

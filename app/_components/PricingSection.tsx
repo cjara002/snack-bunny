@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "./Reveal";
 
 const FREE_FEATURES = [
@@ -62,9 +63,12 @@ const PricingSection = () => (
               </li>
             ))}
           </ul>
-          <button className="w-full bg-[#FFF9F5] text-[#4A3728] font-extrabold text-[15px] py-3.5 rounded-4xl border border-[#E8D5C4] hover:bg-[#F5E6D8] active:scale-[0.96] transition-all">
+          <Link
+            href="/onboarding"
+            className="block w-full bg-[#FFF9F5] text-[#4A3728] font-extrabold text-[15px] py-3.5 rounded-4xl border border-[#E8D5C4] hover:bg-[#F5E6D8] active:scale-[0.96] transition-all text-center"
+          >
             Start free
-          </button>
+          </Link>
         </div>
       </Reveal>
 
@@ -94,7 +98,7 @@ const PricingSection = () => (
             ))}
           </ul>
           <button className="w-full bg-[#E07A5F] text-white font-extrabold text-[15px] py-3.5 rounded-4xl shadow-[0_6px_16px_rgba(224,122,95,0.35)] hover:bg-[#B85A3F] active:scale-[0.96] transition-all">
-            Upgrade — $2.99/mo
+            Coming soon - $2.99/mo
           </button>
         </div>
       </Reveal>
