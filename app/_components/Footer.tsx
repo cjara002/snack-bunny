@@ -22,6 +22,9 @@ const Footer = () => (
     <div className="text-xs font-medium text-[#C9A090]">
       © 2026 SnackBunny — No calorie counting, no guilt.
     </div>
+    <div className="text-xs text-[#C9A090] opacity-70 mt-1">
+      Not a medical or weight-loss tool.
+    </div>
   </footer>
 );
 

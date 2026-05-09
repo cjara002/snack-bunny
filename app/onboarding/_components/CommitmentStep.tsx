@@ -145,6 +145,7 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
         onPointerUp={handlePressEnd}
         onPointerLeave={handlePressEnd}
         onPointerCancel={handlePressEnd}
+        onContextMenu={(e) => e.preventDefault()}
         aria-label="Hold to commit"
         role="button"
         tabIndex={0}
@@ -187,6 +188,9 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
             Skip the commitment
           </button>
         )}
+        <p className="text-[11px] text-[#C9A090] opacity-60 text-center">
+          Not a medical or weight-loss tool.
+        </p>
       </div>
 
       {showSkipModal && (
