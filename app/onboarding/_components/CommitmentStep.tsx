@@ -131,7 +131,7 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
 
   return (
     <div className="flex flex-col items-center gap-8 w-full animate-onboarding-enter">
-      <p className="text-xl font-bold text-[#4A3728] text-center leading-snug max-w-[270px]">
+      <p className="text-xl font-bold text-[#4A3728] text-center leading-snug max-w-67.5">
         I want to snack less.{" "}
         <span className="font-medium text-[#A08070]">
           I don&apos;t want to be perfect&nbsp;— just aware.
@@ -145,6 +145,7 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
         onPointerUp={handlePressEnd}
         onPointerLeave={handlePressEnd}
         onPointerCancel={handlePressEnd}
+        onContextMenu={(e) => e.preventDefault()}
         aria-label="Hold to commit"
         role="button"
         tabIndex={0}
@@ -187,6 +188,9 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
             Skip the commitment
           </button>
         )}
+        <p className="text-[11px] text-[#C9A090] opacity-60 text-center">
+          Not a medical or weight-loss tool.
+        </p>
       </div>
 
       {showSkipModal && (

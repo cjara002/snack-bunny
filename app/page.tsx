@@ -1,10 +1,6 @@
 import Nav from "./_components/Nav";
 import HeroSection from "./_components/HeroSection";
 import HowItWorksSection from "./_components/HowItWorksSection";
-import WhyItWorksSection from "./_components/WhyItWorksSection";
-import QuotesSection from "./_components/QuotesSection";
-import PricingSection from "./_components/PricingSection";
-import SignupSection from "./_components/SignupSection";
 import Footer from "./_components/Footer";
 
 export default function Home() {
@@ -17,11 +13,6 @@ export default function Home() {
       >
         <HeroSection />
         <HowItWorksSection />
-        <WhyItWorksSection />
-        {/* TODOCARLOS: once we get reviews they go here */}
-        {/* <QuotesSection /> */}
-        <PricingSection />
-        {/* <SignupSection /> */}
         <Footer />
       </main>
     </>

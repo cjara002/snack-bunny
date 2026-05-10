@@ -8,6 +8,7 @@ import StatsRow from "./StatsRow";
 import BarChart from "./BarChart";
 import BunnyEvolutionRow from "./BunnyEvolutionRow";
 import PremiumTeaseCard from "./PremiumTeaseCard";
+import HistoryEmptyState from "./HistoryEmptyState";
 import { SNACK_EVENTS_KEY } from "@/lib/storage";
 import { stageFor } from "@/lib/stages";
 
@@ -75,11 +76,18 @@ const HistoryScreen = () => {
   const [days, setDays] = useState<DayData[]>([]);
   const [stats, setStats] = useState<WeekStats>({ total: "—", avg: "—", bestDay: "—" });
   const [mounted, setMounted] = useState(false);
+  const [hasLifetimeSnacks, setHasLifetimeSnacks] = useState(true);
 
   useEffect(() => {
     const weekData = buildWeekData();
     setDays(weekData);
     setStats(getWeekStats(weekData));
+    try {
+      const events: number[] = JSON.parse(localStorage.getItem(SNACK_EVENTS_KEY) ?? "[]");
+      setHasLifetimeSnacks(events.length > 0);
+    } catch {
+      setHasLifetimeSnacks(false);
+    }
     setMounted(true);
   }, []);
 
@@ -87,6 +95,16 @@ const HistoryScreen = () => {
     return (
       <AppShell activeNav="history">
         <div className="pt-2" />
+      </AppShell>
+    );
+  }
+
+  if (!hasLifetimeSnacks) {
+    return (
+      <AppShell activeNav="history">
+        <div className="pt-2">
+          <HistoryEmptyState />
+        </div>
       </AppShell>
     );
   }
