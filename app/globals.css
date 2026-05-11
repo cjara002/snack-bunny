@@ -250,6 +250,12 @@ body {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* ===== iOS touch callout suppression ===== */
+/* Prevents the native iOS "Save Image" popup on long-press */
+.no-ios-callout {
+  -webkit-touch-callout: none;
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
