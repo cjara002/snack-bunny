@@ -46,7 +46,7 @@ const MeetAndNameStep = ({ onNext, onNameChange }: MeetAndNameStepProps) => {
           alt="Your new SnackBunny"
           width={160}
           height={160}
-          className="w-40 animate-bunny-bob"
+          className="w-40 animate-bunny-bob select-none pointer-events-none no-ios-callout"
           draggable={false}
         />
         <ParticleBurst active={showParticles} type="dots" />

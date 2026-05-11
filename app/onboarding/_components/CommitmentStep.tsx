@@ -120,7 +120,7 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
   };
 
   const bunnyClass = [
-    "w-36 select-none transition-[transform,filter] duration-200 ease-out",
+    "w-36 select-none pointer-events-none no-ios-callout transition-[transform,filter] duration-200 ease-out",
     pressing ? "scale-105 drop-shadow-[0_0_16px_rgba(224,122,95,0.4)]" : "",
     isCelebrating ? "animate-bunny-bounce-celebration" : "",
     didShake ? "animate-shake" : "",
