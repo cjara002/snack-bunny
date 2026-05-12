@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { useSnackEvents } from "@/app/hook/useSnackEvents";
 import { faLeaf, faCookie, faPizzaSlice, faFire, faBed, faBomb } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import AppShell from "./AppShell";
@@ -84,6 +86,7 @@ const BUNNY_NAME_KEY = "bunny_name";
 const ONBOARDING_COMPLETE_KEY = "onboarding_complete";
 
 const HomeScreen = () => {
+  const { userId } = useSnackEvents();
   const [mounted, setMounted] = useState(false);
   const [bunnyName, setBunnyName] = useState("Bunny");
   const [count, setCount] = useState(0);
@@ -110,6 +113,27 @@ const HomeScreen = () => {
     setBunnyName(savedName);
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    function syncOfflineQueue() {
+      const queue = JSON.parse(localStorage.getItem('offlineQueue') || '[]');
+      if (queue.length === 0 || !navigator.onLine) return;
+      if (!userId) return;
+
+      const supabase = createClient();
+      const rows = queue.map((ts: number) => ({
+        user_id: userId,
+        created_at: new Date(ts).toISOString(),
+      }));
+      supabase.from('snack_events').insert(rows).then(({ error }) => {
+        if (!error) localStorage.removeItem('offlineQueue');
+      });
+    }
+
+    syncOfflineQueue();
+    window.addEventListener('online', syncOfflineQueue);
+    return () => window.removeEventListener('online', syncOfflineQueue);
+  }, [userId]);
 
   if (!mounted) return <LoadingScreen />;
 
