@@ -1,5 +1,5 @@
 const Footer = () => (
-  <footer className="py-8 pb-12 text-center text-[#A08070]">
+  <footer className="py-8 pb-12 text-center text-textMuted">
     {/* eslint-disable-next-line @next/next/no-img-element */}
     <img
       src="/assets/snack-bunny-favicon.png"
@@ -9,13 +9,13 @@ const Footer = () => (
       className="mx-auto mb-2.5 opacity-60"
     />
     <div className="flex justify-center gap-4.5 mb-3 text-[13px] font-bold">
-      <a href="#" className="hover:text-[#E07A5F] transition-colors">
+      <a href="#" className="hover:text-textPrimary transition-colors">
         Privacy
       </a>
-      <a href="#" className="hover:text-[#E07A5F] transition-colors">
+      <a href="#" className="hover:text-textPrimary transition-colors">
         Terms
       </a>
-      <a href="#" className="hover:text-[#E07A5F] transition-colors">
+      <a href="#" className="hover:text-textPrimary transition-colors">
         Contact
       </a>
     </div>

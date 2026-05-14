@@ -14,20 +14,36 @@ const LockIcon = () => (
   </svg>
 );
 
-const SignInTeaseRow = () => (
-  <div className="flex items-center gap-3.5 px-4 py-3.5">
+interface SignInTeaseRowProps {
+  onClick?: () => void;
+}
+
+const SignInTeaseRow = ({ onClick }: SignInTeaseRowProps) => (
+  <div
+    role={onClick ? 'button' : undefined}
+    tabIndex={onClick ? 0 : undefined}
+    onClick={onClick}
+    onKeyDown={onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+    className={`flex items-center gap-3.5 px-4 py-3.5 transition-colors ${onClick ? 'cursor-pointer hover:bg-baseSecondary' : ''}`}
+  >
     <div className="shrink-0 w-9 h-9 rounded-xl bg-[#F5E6D8] flex items-center justify-center">
       <LockIcon />
     </div>
     <div className="flex-1 min-w-0">
-      <div className="text-[15px] font-extrabold text-[#4A3728]">Sign in to sync</div>
-      <div className="text-[13px] font-semibold text-[#A08070]">
-        Coming soon — your bunny across all your devices
+      <div className="text-[15px] font-extrabold text-textPrimary">Sign in to sync</div>
+      <div className="text-[13px] font-semibold text-textMuted">
+        {onClick ? 'Save your bunny across all your devices' : 'Coming soon — your bunny across all your devices'}
       </div>
     </div>
-    <span className="shrink-0 text-[10px] font-extrabold uppercase tracking-[0.08em] px-2 py-1 rounded-full bg-[#FEF3C7] text-[#92400E]">
-      Soon
-    </span>
+    {onClick ? (
+      <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="#A08070" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    ) : (
+      <span className="shrink-0 text-[10px] font-extrabold uppercase tracking-[0.08em] px-2 py-1 rounded-full bg-[#FEF3C7] text-[#92400E]">
+        Soon
+      </span>
+    )}
   </div>
 );
 

@@ -1,8 +1,9 @@
 interface ProfileCardProps {
   totalSnacks: number;
+  email?: string | null;
 }
 
-const ProfileCard = ({ totalSnacks }: ProfileCardProps) => (
+const ProfileCard = ({ totalSnacks, email }: ProfileCardProps) => (
   <div className="bg-white rounded-[22px] p-4.5 shadow-[0_1px_2px_rgba(74,55,40,0.06)] flex items-center gap-3.5">
     <div className="shrink-0 w-14 h-14 rounded-[18px] bg-[#FFE8DC] flex items-center justify-center">
       <img
@@ -13,15 +14,15 @@ const ProfileCard = ({ totalSnacks }: ProfileCardProps) => (
         className="object-contain"
       />
     </div>
-    <div>
+    <div className="min-w-0">
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[16px] font-black text-[#4A3728]">Free Plan</span>
+        <span className="text-[16px] font-black text-textPrimary">Free Plan</span>
         <span className="bg-[#7EC8A0] text-white text-[9px] font-black uppercase tracking-wide px-2 py-0.75 rounded-full">
           Active
         </span>
       </div>
-      <p className="text-[13px] font-semibold text-[#A08070] mt-0.5">
-        Anonymous user · {totalSnacks} snack{totalSnacks !== 1 ? "s" : ""} logged
+      <p className="text-[13px] font-semibold text-textMuted mt-0.5 truncate">
+        {email ?? "Anonymous user"} · {totalSnacks} snack{totalSnacks !== 1 ? "s" : ""} logged
       </p>
     </div>
   </div>

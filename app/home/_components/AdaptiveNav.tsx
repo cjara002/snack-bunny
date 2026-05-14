@@ -45,7 +45,7 @@ const AdaptiveNav = ({ active }: AdaptiveNavProps) => (
       height={100}
 
     />
-      <span className="font-extrabold text-[#4A3728] text-base">SnackBunny</span>
+      <span className="font-extrabold text-textPrimary text-base">SnackBunny</span>
     </div>
 
     {NAV_ITEMS.map(({ id, label, icon, href }) => {
@@ -59,16 +59,16 @@ const AdaptiveNav = ({ active }: AdaptiveNavProps) => (
             "md:flex-row md:gap-3 md:px-3 md:py-2.5 md:rounded-xl md:w-full",
             isActive
               ? "opacity-100 md:bg-[rgba(74,55,40,0.08)]"
-              : "opacity-45 md:opacity-100 md:text-[#A08070] md:hover:bg-[rgba(74,55,40,0.05)]",
+              : "opacity-45 md:opacity-100 md:text-textMuted md:hover:bg-[rgba(74,55,40,0.05)]",
           ].join(" ")}
         >
           <FontAwesomeIcon
             icon={icon}
-            className={`w-20 h-20 md:w-5 md:h-5 ${isActive ? "text-[#4A3728]" : "text-[#4A3728] md:text-[#A08070]"}`}
+            className={`w-20 h-20 md:w-5 md:h-5 ${isActive ? "text-textPrimary" : "text-textPrimary md:text-textMuted"}`}
           />
           <span
             className={`text-lg font-bold md:text-sm md:font-semibold ${
-              isActive ? "text-[#4A3728]" : "text-[#4A3728] md:text-[#A08070]"
+              isActive ? "text-textPrimary" : "text-textPrimary md:text-textMuted"
             }`}
           >
             {label}
@@ -77,12 +77,6 @@ const AdaptiveNav = ({ active }: AdaptiveNavProps) => (
       );
     })}
 
-    {/* Upgrade CTA — desktop only */}
-    <div className="hidden md:block mt-auto">
-      <button className="w-full text-left px-3 py-2.5 rounded-xl bg-[rgba(224,122,95,0.1)] text-[#E07A5F] text-sm font-bold hover:bg-[rgba(224,122,95,0.15)] transition-colors">
-        Upgrade to Premium
-      </button>
-    </div>
   </nav>
 );
 

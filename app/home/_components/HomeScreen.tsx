@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { useSnackEvents } from "@/app/hook/useSnackEvents";
 import { faLeaf, faCookie, faPizzaSlice, faFire, faBed, faBomb } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import AppShell from "./AppShell";
@@ -49,27 +51,6 @@ const getTodayTimestamps = (): number[] => {
   }
 };
 
-const persistAdd = (): void => {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    const all: number[] = raw ? JSON.parse(raw) : [];
-    all.push(Date.now());
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  } catch {}
-};
-
-const persistRemoveLast = (): void => {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    const all: number[] = raw ? JSON.parse(raw) : [];
-    const todayStart = new Date();
-    todayStart.setHours(0, 0, 0, 0);
-    const past = all.filter((t) => t < todayStart.getTime());
-    const today = all.filter((t) => t >= todayStart.getTime());
-    if (today.length > 0) today.pop();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...past, ...today]));
-  } catch {}
-};
 
 const getDateLabel = (): string => {
   const formatted = new Date().toLocaleDateString("en-US", {
@@ -84,6 +65,7 @@ const BUNNY_NAME_KEY = "bunny_name";
 const ONBOARDING_COMPLETE_KEY = "onboarding_complete";
 
 const HomeScreen = () => {
+  const { userId, syncStatus, addEvent, removeLastEvent } = useSnackEvents();
   const [mounted, setMounted] = useState(false);
   const [bunnyName, setBunnyName] = useState("Bunny");
   const [count, setCount] = useState(0);
@@ -111,6 +93,27 @@ const HomeScreen = () => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    function syncOfflineQueue() {
+      const queue = JSON.parse(localStorage.getItem('offlineQueue') || '[]');
+      if (queue.length === 0 || !navigator.onLine) return;
+      if (!userId) return;
+
+      const supabase = createClient();
+      const rows = queue.map((ts: number) => ({
+        user_id: userId,
+        created_at: new Date(ts).toISOString(),
+      }));
+      supabase.from('snack_events').insert(rows).then(({ error }) => {
+        if (!error) localStorage.removeItem('offlineQueue');
+      });
+    }
+
+    syncOfflineQueue();
+    window.addEventListener('online', syncOfflineQueue);
+    return () => window.removeEventListener('online', syncOfflineQueue);
+  }, [userId]);
+
   if (!mounted) return <LoadingScreen />;
 
   const handleTap = () => {
@@ -120,7 +123,7 @@ const HomeScreen = () => {
     setCount(newCount);
     setTapKey((k) => k + 1);
     setShowUndo(true);
-    persistAdd();
+    addEvent();
 
     if (navigator.vibrate) navigator.vibrate(10);
 
@@ -132,7 +135,7 @@ const HomeScreen = () => {
     if (count <= 0) return;
     setCount((c) => c - 1);
     setShowUndo(false);
-    persistRemoveLast();
+    removeLastEvent();
     if (undoTimerRef.current) clearTimeout(undoTimerRef.current);
   };
 
@@ -140,7 +143,7 @@ const HomeScreen = () => {
 
   return (
     <AppShell activeNav="today">
-      <HomeHeader dateLabel={dateLabel} />
+      <HomeHeader dateLabel={dateLabel} syncStatus={syncStatus} />
       <div className="flex-1 flex flex-col justify-center md:justify-start">
         <StatusPill stage={STAGES[stageIndex]} />
         <BunnyTapZone

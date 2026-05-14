@@ -11,6 +11,10 @@ import PremiumTeaseCard from "./PremiumTeaseCard";
 import HistoryEmptyState from "./HistoryEmptyState";
 import { SNACK_EVENTS_KEY } from "@/lib/storage";
 import { stageFor } from "@/lib/stages";
+import { createClient } from "@/lib/supabase/client";
+import { FEATURES } from "@/lib/features";
+import { SignInModal } from "@/app/_components/SignInModal";
+import type { User } from "@supabase/supabase-js";
 
 interface DayData {
   date: Date;
@@ -77,6 +81,8 @@ const HistoryScreen = () => {
   const [stats, setStats] = useState<WeekStats>({ total: "—", avg: "—", bestDay: "—" });
   const [mounted, setMounted] = useState(false);
   const [hasLifetimeSnacks, setHasLifetimeSnacks] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [showSignIn, setShowSignIn] = useState(false);
 
   useEffect(() => {
     const weekData = buildWeekData();
@@ -89,6 +95,10 @@ const HistoryScreen = () => {
       setHasLifetimeSnacks(false);
     }
     setMounted(true);
+
+    if (FEATURES.AUTH_ENABLED) {
+      createClient().auth.getUser().then(({ data }) => setUser(data.user));
+    }
   }, []);
 
   if (!mounted) {
@@ -100,11 +110,13 @@ const HistoryScreen = () => {
   }
 
   if (!hasLifetimeSnacks) {
+    const signInClick = !user && FEATURES.AUTH_ENABLED ? () => setShowSignIn(true) : undefined;
     return (
       <AppShell activeNav="history">
         <div className="pt-2">
-          <HistoryEmptyState />
+          <HistoryEmptyState onSignInClick={signInClick} />
         </div>
+        <SignInModal isOpen={showSignIn} onClose={() => setShowSignIn(false)} />
       </AppShell>
     );
   }
@@ -117,25 +129,26 @@ const HistoryScreen = () => {
         {/* Page header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-[26px] font-black text-[#4A3728] tracking-tight leading-tight">
+            <h1 className="text-[26px] font-black text-textPrimary tracking-tight leading-tight">
               This week
             </h1>
-            <p className="text-[13px] font-bold text-[#A08070] mt-1">{dateRange}</p>
+            <p className="text-[13px] font-bold text-textMuted mt-1">{dateRange}</p>
           </div>
           <Link
             href="/home"
-            className="bg-white rounded-full px-4 py-2.5 text-[13px] font-extrabold text-[#4A3728] shadow-[0_1px_2px_rgba(74,55,40,0.06)] whitespace-nowrap hover:shadow-[0_4px_12px_rgba(74,55,40,0.08)] transition-shadow"
+            className="bg-white rounded-full px-4 py-2.5 text-[13px] font-extrabold text-textPrimary shadow-[0_1px_2px_rgba(74,55,40,0.06)] whitespace-nowrap hover:shadow-[0_4px_12px_rgba(74,55,40,0.08)] transition-shadow"
           >
             Today →
           </Link>
         </div>
 
-        <SyncBanner />
+        {!user && FEATURES.AUTH_ENABLED && <SyncBanner onClick={() => setShowSignIn(true)} />}
         <StatsRow stats={stats} />
         <BarChart days={days} />
         <BunnyEvolutionRow days={days} />
         <PremiumTeaseCard />
       </div>
+      <SignInModal isOpen={showSignIn} onClose={() => setShowSignIn(false)} />
     </AppShell>
   );
 };
