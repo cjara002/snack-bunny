@@ -9,4 +9,6 @@ export const SB_KEYS = [
   'committed_at',
   'commitment_method',
   'arrived_via_share',
+  'sb_migrated',
+  'offlineQueue',
 ];

@@ -2,6 +2,20 @@
 
 @theme {
   --font-sans: var(--font-nunito), Arial, Helvetica, sans-serif;
+
+  /* SnackBunny color tokens */
+  --color-primary: #E07A5F;
+  --color-primaryTertiary: #C95F43;
+  --color-baseSecondary: #FFF9F5;
+  --color-secondary: #FFFFFF;
+  --color-borderSoft: #E8D5C4;
+  --color-surfaceTertiary: #F5EDE4;
+  --color-textPrimary: #4A3728;
+  --color-textSecondary: #7A5C4A;
+  --color-textMuted: #A08070;
+  --color-errorPrimary: #DC2626;
+  --color-successSecondary: #D1FAE5;
+  --color-successTertiary: #065F46;
 }
 
 :root {

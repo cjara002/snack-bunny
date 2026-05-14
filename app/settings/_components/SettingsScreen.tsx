@@ -10,12 +10,19 @@ import ReminderRow from "./ReminderRow";
 import DeleteDataRow from "./DeleteDataRow";
 import SettingsFooter from "./SettingsFooter";
 import { SNACK_EVENTS_KEY, BUNNY_NAME_KEY, SB_KEYS } from "@/lib/storage";
+import { SignInModal } from "@/app/_components/SignInModal";
+import { FEATURES } from "@/lib/features";
+import { createClient } from "@/lib/supabase/client";
+import SignedInRow from "./SignedInRow";
+import type { User } from "@supabase/supabase-js";
 
 const SettingsScreen = () => {
   const [mounted, setMounted] = useState(false);
   const [bunnyName, setBunnyName] = useState("Bunny");
   const [totalSnacks, setTotalSnacks] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const name = localStorage.getItem(BUNNY_NAME_KEY) || "Bunny";
@@ -26,6 +33,10 @@ const SettingsScreen = () => {
     setBunnyName(name);
     setTotalSnacks(events.length);
     setMounted(true);
+
+    if (FEATURES.AUTH_ENABLED) {
+      createClient().auth.getUser().then(({ data }) => setUser(data.user));
+    }
   }, []);
 
   const handleSaveName = (cleaned: string) => {
@@ -51,7 +62,7 @@ const SettingsScreen = () => {
     return (
       <AppShell activeNav="settings">
         <div className="pt-2 flex items-center justify-center min-h-40">
-          <p className="text-[14px] font-bold text-[#A08070]">Clearing data…</p>
+          <p className="text-[14px] font-bold text-textMuted">Clearing data…</p>
         </div>
       </AppShell>
     );
@@ -62,22 +73,26 @@ const SettingsScreen = () => {
       <div className="pt-2 pb-4">
         {/* Page header */}
         <div className="mb-4">
-          <h1 className="text-[26px] font-black text-[#4A3728] tracking-tight leading-tight">
+          <h1 className="text-[26px] font-black text-textPrimary tracking-tight leading-tight">
             Settings
           </h1>
-          <p className="text-[13px] font-bold text-[#A08070] mt-1">
+          <p className="text-[13px] font-bold text-textMuted mt-1">
             Tweak your bunny, manage your data
           </p>
         </div>
 
-        <ProfileCard totalSnacks={totalSnacks} />
+        <ProfileCard totalSnacks={totalSnacks} email={user?.email} />
 
         <SettingsSection label="Your bunny">
           <BunnyNameRow name={bunnyName} onSave={handleSaveName} />
         </SettingsSection>
 
         <SettingsSection label="Account">
-          <SignInTeaseRow />
+          {user ? (
+            <SignedInRow />
+          ) : (
+            <SignInTeaseRow onClick={FEATURES.AUTH_ENABLED ? () => setShowSignIn(true) : undefined} />
+          )}
           <ReminderRow />
         </SettingsSection>
 
@@ -87,6 +102,7 @@ const SettingsScreen = () => {
 
         <SettingsFooter />
       </div>
+      <SignInModal isOpen={showSignIn} onClose={() => setShowSignIn(false)} />
     </AppShell>
   );
 };
