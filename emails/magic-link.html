@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap');
+  </style>
+</head>
+<body style="margin:0;padding:40px 16px;background-color:#FFF9F5;font-family:Nunito,Arial,sans-serif;">
+
+  <!-- Preview text (hidden in body, shows in inbox) -->
+  <div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0;">
+    Tap here to open your SnackBunny
+  </div>
+
+  <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+      <td align="center">
+        <table width="480" cellpadding="0" cellspacing="0" role="presentation" style="max-width:480px;width:100%;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom:12px;">
+              <img
+                src="https://rzkzxxwgiwvoykmkpypj.supabase.co/storage/v1/object/public/assets/snack-bunny-logo.png"
+                alt="SnackBunny"
+                width="220"
+                style="display:block;height:auto;border:0;"
+              />
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#FFFFFF;border:1px solid #E8D5C4;border-radius:16px;padding:40px 36px;">
+
+              <p style="color:#4A3728;font-size:24px;font-weight:800;line-height:1.3;margin:0 0 12px 0;text-align:center;">
+                Your bunny is waiting.
+              </p>
+
+              <p style="color:#7A5C4A;font-size:15px;line-height:1.6;margin:0 0 32px 0;text-align:center;">
+                Click the button below to sign in. No password needed &mdash; just one tap and you&rsquo;re in.
+              </p>
+
+              <!-- Button -->
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:32px;">
+                <tr>
+                  <td align="center">
+                    <a
+                      href="{{ .ConfirmationURL }}"
+                      style="background-color:#E07A5F;border-radius:100px;color:#FFFFFF;display:inline-block;font-size:16px;font-weight:700;padding:14px 36px;text-decoration:none;font-family:Nunito,Arial,sans-serif;"
+                    >
+                      Open my bunny
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <hr style="border:0;border-top:1px solid #E8D5C4;margin:0 0 24px 0;" />
+
+              <p style="color:#A08070;font-size:13px;line-height:1.6;margin:0;text-align:center;">
+                This link expires in 1 hour. If you didn&rsquo;t request this, you can safely ignore this email.
+              </p>
+
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
