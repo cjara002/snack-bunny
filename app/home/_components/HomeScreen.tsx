@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useSnackEvents } from "@/app/hook/useSnackEvents";
 import { faLeaf, faCookie, faPizzaSlice, faFire, faBed, faBomb } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import type { User } from "@supabase/supabase-js";
+import { FEATURES } from "@/lib/features";
 import AppShell from "./AppShell";
 import HomeHeader from "./HomeHeader";
 import StatusPill from "./StatusPill";
@@ -71,6 +73,7 @@ const HomeScreen = () => {
   const [count, setCount] = useState(0);
   const [tapKey, setTapKey] = useState(0);
   const [showUndo, setShowUndo] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const undoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dateLabel = getDateLabel();
 
@@ -91,6 +94,10 @@ const HomeScreen = () => {
     setCount(todayCount);
     setBunnyName(savedName);
     setMounted(true);
+
+    if (FEATURES.AUTH_ENABLED) {
+      createClient().auth.getUser().then(({ data }) => setUser(data.user));
+    }
   }, []);
 
   useEffect(() => {
@@ -143,7 +150,7 @@ const HomeScreen = () => {
 
   return (
     <AppShell activeNav="today">
-      <HomeHeader dateLabel={dateLabel} syncStatus={syncStatus} />
+      <HomeHeader dateLabel={dateLabel} syncStatus={syncStatus} user={user} />
       <div className="flex-1 flex flex-col justify-center md:justify-start">
         <StatusPill stage={STAGES[stageIndex]} />
         <BunnyTapZone

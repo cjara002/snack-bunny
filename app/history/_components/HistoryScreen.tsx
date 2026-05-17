@@ -14,6 +14,7 @@ import { stageFor } from "@/lib/stages";
 import { createClient } from "@/lib/supabase/client";
 import { FEATURES } from "@/lib/features";
 import { SignInModal } from "@/app/_components/SignInModal";
+import AvatarMenu from "@/app/home/_components/AvatarMenu";
 import type { User } from "@supabase/supabase-js";
 
 interface DayData {
@@ -134,12 +135,15 @@ const HistoryScreen = () => {
             </h1>
             <p className="text-[13px] font-bold text-textMuted mt-1">{dateRange}</p>
           </div>
-          <Link
-            href="/home"
-            className="bg-white rounded-full px-4 py-2.5 text-[13px] font-extrabold text-textPrimary shadow-[0_1px_2px_rgba(74,55,40,0.06)] whitespace-nowrap hover:shadow-[0_4px_12px_rgba(74,55,40,0.08)] transition-shadow"
-          >
-            Today →
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/home"
+              className="bg-white rounded-full px-4 py-2.5 text-[13px] font-extrabold text-textPrimary shadow-[0_1px_2px_rgba(74,55,40,0.06)] whitespace-nowrap hover:shadow-[0_4px_12px_rgba(74,55,40,0.08)] transition-shadow"
+            >
+              Today →
+            </Link>
+            {user && <AvatarMenu user={user} />}
+          </div>
         </div>
 
         {!user && FEATURES.AUTH_ENABLED && <SyncBanner onClick={() => setShowSignIn(true)} />}
