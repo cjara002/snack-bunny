@@ -270,6 +270,58 @@ body {
   -webkit-touch-callout: none;
 }
 
+/* ===== SweetAlert2 toast overrides ===== */
+.snackbunny-toast-container.swal2-container {
+  padding-bottom: 24px;
+}
+
+@media (max-width: 767px) {
+  .snackbunny-toast-container.swal2-container {
+    padding-bottom: 96px;
+  }
+}
+
+.snackbunny-toast.swal2-popup {
+  background: var(--color-textPrimary) !important;
+  color: var(--color-secondary) !important;
+  border-radius: 9999px !important;
+  font-family: var(--font-nunito), sans-serif !important;
+  padding: 10px 20px !important;
+  min-width: 0 !important;
+}
+
+.snackbunny-toast .swal2-title {
+  color: var(--color-secondary) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.snackbunny-toast .swal2-icon {
+  margin: 0 8px 0 0 !important;
+  width: 22px !important;
+  height: 22px !important;
+  border-width: 2px !important;
+}
+
+.snackbunny-toast .swal2-icon.swal2-success {
+  border-color: #6ee7b7 !important;
+  color: #6ee7b7 !important;
+}
+
+.snackbunny-toast .swal2-icon.swal2-success [class^="swal2-success-line"] {
+  background-color: #6ee7b7 !important;
+}
+
+.snackbunny-toast .swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(110, 231, 183, 0.3) !important;
+}
+
+.snackbunny-toast-error.swal2-popup {
+  background: var(--color-errorPrimary) !important;
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
