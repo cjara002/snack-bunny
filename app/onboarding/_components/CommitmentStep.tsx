@@ -130,60 +130,61 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
     .join(" ");
 
   return (
-    <div className="flex flex-col items-center gap-8 w-full animate-onboarding-enter">
-      <p className="text-xl font-bold text-[#4A3728] text-center leading-snug max-w-67.5">
-        I want to snack less.{" "}
-        <span className="font-medium text-[#A08070]">
-          I don&apos;t want to be perfect&nbsp;— just aware.
-        </span>
-      </p>
-
-      {/* Press target — pointer events only, no button role to avoid focus ring */}
-      <div
-        className="relative touch-none cursor-pointer"
-        onPointerDown={handlePressStart}
-        onPointerUp={handlePressEnd}
-        onPointerLeave={handlePressEnd}
-        onPointerCancel={handlePressEnd}
-        onContextMenu={(e) => e.preventDefault()}
-        aria-label="Hold to commit"
-        role="button"
-        tabIndex={0}
-      >
-        <CommitmentRing
-          progress={progress}
-          isResetting={isResetting}
-          isFlashing={isFlashing}
-        >
-          <div className="relative">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/bunny-stage-0.svg"
-              alt=""
-              width={144}
-              height={144}
-              className={bunnyClass}
-              draggable={false}
-            />
-            <ParticleBurst active={showParticles} type="hearts" />
-          </div>
-        </CommitmentRing>
+    <div className="flex flex-col items-center gap-6 w-full animate-onboarding-enter">
+      <div className="flex flex-col items-center gap-3">
+        <p className="text-sm font-semibold text-textMuted text-center tracking-wide uppercase">
+          Make the following commitment to yourself
+        </p>
+        <p className="text-xl font-bold text-textPrimary text-center leading-snug max-w-67.5">
+          "I want to snack less.{" "}
+          <span className="font-medium text-textMuted">
+            I don&apos;t want to be perfect&nbsp;— just aware."
+          </span>
+        </p>
       </div>
 
-      <div className="flex flex-col items-center gap-4">
-        <p
-          className={`text-sm font-semibold text-[#C9A090] transition-opacity ${
-            !pressing && !isComplete ? "animate-dot-pulse" : ""
-          }`}
-        >
-          {helperText}
-        </p>
+      {/* Bunny + ring — display only, no pointer events here */}
+      <CommitmentRing
+        progress={progress}
+        isResetting={isResetting}
+        isFlashing={isFlashing}
+      >
+        <div className="relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/bunny-stage-0.svg"
+            alt=""
+            width={144}
+            height={144}
+            className={bunnyClass}
+            draggable={false}
+          />
+          <ParticleBurst active={showParticles} type="hearts" />
+        </div>
+      </CommitmentRing>
+
+      <div className="flex flex-col items-center gap-4 w-full">
+        {/* Dedicated hold button — no image inside, so no browser save-image overlay */}
+        {!isComplete && (
+          <button
+            type="button"
+            className="px-10 py-4 rounded-full bg-primary text-white font-bold text-base touch-none select-none cursor-pointer transition-transform active:scale-95"
+            onPointerDown={handlePressStart}
+            onPointerUp={handlePressEnd}
+            onPointerLeave={handlePressEnd}
+            onPointerCancel={handlePressEnd}
+            onContextMenu={(e) => e.preventDefault()}
+            aria-label="Hold to commit"
+          >
+            Hold to commit
+          </button>
+        )}
 
         {!isComplete && (
           <button
             type="button"
             onClick={() => setShowSkipModal(true)}
-            className="text-xs text-[#C9A090] underline underline-offset-2 hover:text-[#A08070] transition-colors"
+            className="text-xs text-[#C9A090] underline underline-offset-2 hover:text-textMuted transition-colors"
           >
             Skip the commitment
           </button>
@@ -196,17 +197,17 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
       {showSkipModal && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 px-6">
           <div className="bg-white rounded-3xl p-6 w-full max-w-xs shadow-xl flex flex-col gap-4 animate-pop-in">
-            <p className="font-extrabold text-[#4A3728] text-center text-lg leading-tight">
+            <p className="font-extrabold text-textPrimary text-center text-lg leading-tight">
               Skip the commitment?
             </p>
-            <p className="text-sm text-[#A08070] text-center">
+            <p className="text-sm text-textMuted text-center">
               You can always stay mindful without it.
             </p>
             <div className="flex gap-3 mt-1">
               <button
                 type="button"
                 onClick={() => setShowSkipModal(false)}
-                className="flex-1 border-2 border-[rgba(74,55,40,0.12)] rounded-2xl py-3 font-bold text-[#4A3728] hover:bg-[rgba(74,55,40,0.05)] transition-colors"
+                className="flex-1 border-2 border-[rgba(74,55,40,0.12)] rounded-2xl py-3 font-bold text-textPrimary hover:bg-[rgba(74,55,40,0.05)] transition-colors"
               >
                 Cancel
               </button>
@@ -216,7 +217,7 @@ const CommitmentStep = ({ onComplete }: CommitmentStepProps) => {
                   setShowSkipModal(false);
                   onCompleteRef.current("skipped");
                 }}
-                className="flex-1 bg-[#E07A5F] text-white rounded-2xl py-3 font-bold hover:bg-[#B85A3F] transition-colors"
+                className="flex-1 bg-primary text-white rounded-2xl py-3 font-bold hover:bg-[#B85A3F] transition-colors"
               >
                 Yes, skip
               </button>
