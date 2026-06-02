@@ -1,6 +1,6 @@
-// r=140 → circumference ≈ 880, matching the spec exactly
-const RADIUS = 140;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS; // 879.6 ≈ 880
+// r=90 → circumference ≈ 565
+const RADIUS = 90;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS; // 565.5 ≈ 565
 
 interface CommitmentRingProps {
   progress: number; // 0–1
@@ -14,36 +14,36 @@ const CommitmentRing = ({ progress, isResetting, isFlashing, children }: Commitm
   const strokeColor = isFlashing ? "#ffffff" : "#E07A5F";
 
   return (
-    // SVG is 300x300 so the r=140 stroke (centered at 150,150) has 10px breathing room
-    <div className="relative flex items-center justify-center" style={{ width: 300, height: 300 }}>
+    // SVG is 200x200 so the r=90 stroke (centered at 100,100) has 10px breathing room
+    <div className="relative flex items-center justify-center" style={{ width: 200, height: 200 }}>
       <svg
-        width={300}
-        height={300}
-        viewBox="0 0 300 300"
+        width={200}
+        height={200}
+        viewBox="0 0 200 200"
         className="absolute inset-0"
         aria-hidden
       >
         {/* Track ring */}
         <circle
-          cx={150}
-          cy={150}
+          cx={100}
+          cy={100}
           r={RADIUS}
           fill="none"
           stroke="rgba(74,55,40,0.08)"
-          strokeWidth={7}
+          strokeWidth={5}
         />
         {/* Progress ring — starts at 12 o'clock */}
         <circle
-          cx={150}
-          cy={150}
+          cx={100}
+          cy={100}
           r={RADIUS}
           fill="none"
           stroke={strokeColor}
-          strokeWidth={7}
+          strokeWidth={5}
           strokeLinecap="round"
           strokeDasharray={CIRCUMFERENCE}
           strokeDashoffset={dashOffset}
-          transform="rotate(-90 150 150)"
+          transform="rotate(-90 100 100)"
           style={{
             transition: isResetting ? "stroke-dashoffset 200ms ease-out" : "none",
           }}
