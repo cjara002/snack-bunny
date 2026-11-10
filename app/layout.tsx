@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
+
+// Ship Font Awesome's CSS with the page instead of injecting it after
+// hydration, which otherwise renders icons huge on first paint.
+config.autoAddCss = false;
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -10,9 +16,9 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "SnackBunny — No calorie counting, no guilt",
+  title: "SnackBunny | Your progress has a face",
   description:
-    "Tap your SnackBunny each time you snack. The more you tap, the chonkier it gets. Mindful snacking without the math.",
+    "A gentle self-care companion for iPhone. Log meals, water, sleep and mood, and your bunny reflects your habits, never your body. Join the waitlist.",
   icons: {
     icon: "/assets/snack-bunny-favicon.png",
   },

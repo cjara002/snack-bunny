@@ -1,21 +1,17 @@
-import Nav from "./_components/Nav";
-import HeroSection from "./_components/HeroSection";
-import HowItWorksSection from "./_components/HowItWorksSection";
-import Footer from "./_components/Footer";
+import LandingNav from "./landing/_components/LandingNav";
+import HeroSection from "./landing/_components/HeroSection";
 import SignedOutToastManager from "./_components/SignedOutToastManager";
 
+// The phase-1 landing sections (app/_components/*Section.tsx) are kept on disk
+// but no longer rendered. SignedOutToastManager stays: the phase-1 app routes
+// back here after sign-out and expects the toast.
 export default function Home() {
   return (
     <>
-      <Nav />
+      <LandingNav />
       <SignedOutToastManager />
-      <main
-        id="top"
-        className="w-full max-w-120 md:max-w-5xl mx-auto px-5 md:px-12"
-      >
+      <main id="top" className="mx-auto w-full max-w-6xl px-5 md:px-12">
         <HeroSection />
-        <HowItWorksSection />
-        <Footer />
       </main>
     </>
   );

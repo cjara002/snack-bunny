@@ -16,6 +16,38 @@
   --color-errorPrimary: #DC2626;
   --color-successSecondary: #D1FAE5;
   --color-successTertiary: #065F46;
+
+  /* Mirrored from snackbunny-mobile (src/shared/theme/colors.js) */
+  --color-primaryPressed: #B85A3F;
+  --color-accent: #4A3728;
+  --color-accentDeep: #2A1810;
+  --color-surfaceWarm: #FFE8DC;
+  --color-surfaceRaised: #F5E6D8;
+  --color-textFaint: #C9A090;
+
+  /* Pillar colors - use only for their pillar */
+  --color-pillarCalories: #E07A5F;
+  --color-pillarWater: #57B0C2;
+  --color-pillarSleep: #7C6FA6;
+  --color-pillarMood: #E8A94A;
+  --color-pillarSteps: #7EC8A0;
+
+  /* Macros */
+  --color-macroProtein: #E07A5F;
+  --color-macroCarbs: #E8A94A;
+  --color-macroFat: #7C6FA6;
+
+  /* Bunny vitality / aura */
+  --color-vitaThriving: #7EC8A0;
+  --color-vitaOkay: #E8C96A;
+  --color-vitaSluggish: #C9A090;
+
+  /* Warm brown-tinted shadows (never pure black) */
+  --shadow-warmSm: 0 1px 2px rgba(74, 55, 40, 0.06);
+  --shadow-warmMd: 0 4px 12px rgba(74, 55, 40, 0.08);
+  --shadow-warmLg: 0 12px 32px rgba(74, 55, 40, 0.12);
+  --shadow-cta: 0 6px 16px rgba(224, 122, 95, 0.35);
+  --shadow-phone: 0 24px 56px rgba(74, 55, 40, 0.24);
 }
 
 :root {
@@ -320,6 +352,49 @@ body {
 
 .snackbunny-toast-error.swal2-popup {
   background: var(--color-errorPrimary) !important;
+}
+
+/* ===== Landing: app preview ===== */
+/* Mirrors the mobile bunny's idle breathing (2s cycle, anchored at the feet). */
+@keyframes bunny-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025, 1.035); }
+}
+
+@keyframes bunny-tap {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes aura-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.06); }
+}
+
+.animate-bunny-breathe {
+  animation: bunny-breathe 2s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.animate-bunny-tap {
+  animation: bunny-tap 360ms var(--ease-bounce);
+  transform-origin: 50% 100%;
+}
+
+.animate-aura-glow {
+  animation: aura-glow 4s ease-in-out infinite;
+}
+
+/* Enters, holds, then fades on its own, so the toast needs no timer. */
+@keyframes toast-life {
+  0% { opacity: 0; transform: translateY(8px) scale(0.92); }
+  10%, 80% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+
+.animate-toast-life {
+  animation: toast-life 2.2s var(--ease-bounce) forwards;
 }
 
 /* ===== Reduced motion ===== */
