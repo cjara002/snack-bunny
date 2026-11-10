@@ -85,8 +85,8 @@ export default function PrivacyPage() {
         <ul>
           <li>
             With service providers who assist in app functionality: Supabase (accounts and data storage), RevenueCat
-            (subscription status), Apple (App Store purchases and notifications), and Vercel (website hosting and
-            analytics). They may only use your information to provide their services to us.
+            (subscription status), Apple (App Store purchases and notifications), Brevo (waitlist emails), and Vercel
+            (website hosting and analytics). They may only use your information to provide their services to us.
           </li>
           <li>If required by law or to protect our rights.</li>
         </ul>
