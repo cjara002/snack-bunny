@@ -20,13 +20,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Badge from "@/app/_components/ui/Badge";
 import Card from "@/app/_components/ui/Card";
+import IconChip from "@/app/_components/ui/IconChip";
 import ProgressBar from "@/app/_components/ui/ProgressBar";
+import { BUNNY_NAME } from "../constants/content";
 
 // A static recreation of the mobile app's Today screen, using the seed values
 // from the dashboard handoff. Only the bunny is interactive, exactly like the
 // app: tapping it is affection only and changes no data.
 
-const BUNNY_NAME = "Mochi";
 const CALORIES = 1240;
 const CALORIE_TARGET = 1800;
 
@@ -58,23 +59,23 @@ const PILLARS = [
   {
     name: "Water",
     icon: faDroplet,
-    chip: "bg-pillarWater/15 text-pillarWater",
+    tone: "water",
     source: "add",
     emptyText: null,
-    reading: { value: "5", unit: "/ 8 cups", progress: 5, target: 8, tone: "water", label: "Water, 5 of 8 cups" },
+    reading: { value: "5", unit: "/ 8 cups", progress: 5, target: 8, label: "Water, 5 of 8 cups" },
   },
   {
     name: "Sleep",
     icon: faMoon,
-    chip: "bg-pillarSleep/15 text-pillarSleep",
+    tone: "sleep",
     source: "health",
     emptyText: null,
-    reading: { value: "7.5", unit: "/ 8h", progress: 7.5, target: 8, tone: "sleep", label: "Sleep, 7.5 of 8 hours" },
+    reading: { value: "7.5", unit: "/ 8h", progress: 7.5, target: 8, label: "Sleep, 7.5 of 8 hours" },
   },
   {
     name: "Mood",
     icon: faFaceSmile,
-    chip: "bg-pillarMood/15 text-pillarMood",
+    tone: "mood",
     source: "add",
     emptyText: "How are you today?",
     reading: null,
@@ -82,10 +83,10 @@ const PILLARS = [
   {
     name: "Steps",
     icon: faShoePrints,
-    chip: "bg-pillarSteps/15 text-pillarSteps",
+    tone: "steps",
     source: "health",
     emptyText: null,
-    reading: { value: "6.2k", unit: "/ 8k", progress: 6240, target: 8000, tone: "steps", label: "Steps, 6,240 of 8,000" },
+    reading: { value: "6.2k", unit: "/ 8k", progress: 6240, target: 8000, label: "Steps, 6,240 of 8,000" },
   },
 ] as const;
 
@@ -115,12 +116,10 @@ const renderMacro = ({ letter, name, value, target, tone }: (typeof MACROS)[numb
   </div>
 );
 
-const renderPillar = ({ name, icon, chip, source, emptyText, reading }: (typeof PILLARS)[number]) => (
+const renderPillar = ({ name, icon, tone, source, emptyText, reading }: (typeof PILLARS)[number]) => (
   <Card key={name} padding="xs" radius="md" className="flex min-h-23 flex-col">
     <div className="flex items-start justify-between">
-      <span className={`grid size-6 place-items-center rounded-lg ${chip}`}>
-        <FontAwesomeIcon icon={icon} className="text-[10px]" />
-      </span>
+      <IconChip icon={icon} tone={tone} size="sm" />
       {source === "health" ? (
         <span className="flex items-center gap-0.5 text-[7px] font-bold text-textFaint">
           <FontAwesomeIcon icon={faHeart} className="text-[6px]" />
@@ -142,7 +141,7 @@ const renderPillar = ({ name, icon, chip, source, emptyText, reading }: (typeof 
         <ProgressBar
           value={reading.progress}
           max={reading.target}
-          tone={reading.tone}
+          tone={tone}
           label={reading.label}
           className="mt-auto"
         />
